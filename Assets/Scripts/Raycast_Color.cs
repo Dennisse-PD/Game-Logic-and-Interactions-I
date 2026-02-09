@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Raycast_Color : MonoBehaviour
 {
@@ -12,10 +15,9 @@ public class Raycast_Color : MonoBehaviour
     {
 
         //if mouse click 
-        if (Input.GetMouseButton(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Debug.Log("Mouse click registered!");
-            //fire cast from cam
+            //fire ray from cam
             castRay();
         }
 
@@ -24,6 +26,9 @@ public class Raycast_Color : MonoBehaviour
     private void castRay()
     {
         //fire cast from cam
+        Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);//The proper way to fire from screen
+
+        //Check if the ray hit something
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out RaycastHit hitinfo, 100, _rayMask))
         //transform.position = origin , transform.vecttor 3 the direction of rht ray, out is the output variable which is of type Raycasthit, 20 is the units it travelels
 
