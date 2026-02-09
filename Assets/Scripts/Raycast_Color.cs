@@ -6,18 +6,11 @@ using UnityEngine;
 public class Raycast_Color : MonoBehaviour
 {
     [SerializeField] GameObject _cube;
-    /*  [[[[[[[[GENERAL INFO]]]]]]]]*/
-    //Requires user input
-    //Resgister left-mouse click
-
-    //if click is registered
-    //Cast ray from main cam or mouse position
-    //Change color when ray hits cube obj(acces the obj we hit)
-    //Filtering with layermask is optinal in this case but I might do it anyways because it's cleaner
+    [SerializeField] LayerMask _rayMask;
 
     private void Update()
     {
-        
+
         //if mouse click 
         if (Input.GetMouseButton(0))
         {
@@ -30,11 +23,20 @@ public class Raycast_Color : MonoBehaviour
     }
     private void castRay()
     {
+        //fire cast from cam
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out RaycastHit hitinfo, 100, _rayMask))
+        //transform.position = origin , transform.vecttor 3 the direction of rht ray, out is the output variable which is of type Raycasthit, 20 is the units it travelels
 
-            //fire cast from cam
-            //search for player layer--> if layer....
-            //access the object so get component
-            //change component color
+        {
+            Debug.Log("Hit something!");
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.green);
+            _cube.GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            Debug.Log("Hit nothing");
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.red);
+        }
         
+        }
     }
-}
