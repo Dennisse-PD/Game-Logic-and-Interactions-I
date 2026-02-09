@@ -25,17 +25,24 @@ public class Raycast_Color : MonoBehaviour
     }
     private void castRay()
     {
+        //mouse position vector variable
+        Vector2 mousePos = Mouse.current.position.ReadValue();// stores the current mouse position
+
         //fire cast from cam
         Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);//The proper way to fire from screen
+        //store the hit information, what did it hit?
+        RaycastHit hitInfo;
 
         //Check if the ray hit something
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out RaycastHit hitinfo, 100, _rayMask))
+        //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out RaycastHit hitinfo, 100, _rayMask))
         //transform.position = origin , transform.vecttor 3 the direction of rht ray, out is the output variable which is of type Raycasthit, 20 is the units it travelels
 
+        if (Physics.Raycast(rayOrigin,out hitInfo))
         {
             Debug.Log("Hit something!");
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.green);
-            _cube.GetComponent<Renderer>().material.color = Color.green;
+            //_cube.GetComponent<Renderer>().material.color = Color.green;
+            hitInfo.collider.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
         }
         else
         {
