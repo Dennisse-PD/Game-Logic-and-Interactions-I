@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
-public class Raycast_Color : MonoBehaviour
+public class Raycast : MonoBehaviour
 {
-    [SerializeField] GameObject _cube;
     [SerializeField] LayerMask _rayMask;
 
     private void Update()
@@ -30,30 +27,37 @@ public class Raycast_Color : MonoBehaviour
 
         //fire cast from cam
         Ray rayOrigin = Camera.main.ScreenPointToRay(Input.mousePosition);//The proper way to fire from screen
+
         //store the hit information, what did it hit?
         RaycastHit hitInfo;
 
         //Check if the ray hit something
-        //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward),out RaycastHit hitinfo, 100, _rayMask))
-        //transform.position = origin , transform.vecttor 3 the direction of rht ray, out is the output variable which is of type Raycasthit, 20 is the units it travelels
-
-        if (Physics.Raycast(rayOrigin,out hitInfo,_rayMask))
+        if (Physics.Raycast(rayOrigin, out hitInfo))
         {
-            Debug.Log("Hit: " + hitInfo.collider.name);
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.green);
-            //_cube.GetComponent<Renderer>().material.color = Color.green;
             var hitObject = hitInfo.collider;//var to store collider acquired via hitinfo
-            if(hitObject.GetComponent<MeshRenderer>() != null)
+            if (hitObject.GetComponent<MeshRenderer>() != null) //always check if not null 
             {
+
+                Debug.Log("Hit Player Collider: " + hitInfo.collider.name);
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.green);
                 hitInfo.collider.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
             }
-           
+
+            else
+            {
+                Debug.Log("Hit wrong Collider: " + hitInfo.collider.name);
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.red);
+
+
+            }
         }
+
         else
         {
-            Debug.Log("Hit nothing");
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.red);
+            Debug.LogError("Missing Component!");
         }
-        
+
+
         }
     }
+
