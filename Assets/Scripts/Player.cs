@@ -32,24 +32,31 @@ public class Player : MonoBehaviour
 
         if(Physics.Raycast(rayOrigin, out hitInfo)) //Casts ray from origin, then check what was hit
         {
-            var hitObject = hitInfo.collider;//variable to store collider data acquired via hitinfo
-            if (hitObject.GetComponent<MeshRenderer>() != null)  //always check if there is a collider at all to avoid code-breaking errors
+            var hitObject = hitInfo.collider;//variable to store collider data acquired via
+            var hitRenderer = hitInfo.collider.GetComponent<Renderer>();
+
+            if (hitObject == null)
             {
-                if (hitInfo.collider.tag == "Player")
-                    Debug.Log("You just hit " + hitInfo.collider.name);
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.green);
-                hitInfo.collider.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
+                return; // switch case won't run if there is nothing there(null)
             }
-            if (hitInfo.collider.tag == "Enemy")
+            switch (hitInfo.collider.tag)
             {
-                hitInfo.collider.GetComponent<MeshRenderer>().material.color = Color.black;
+                case "Player":
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.green);
+                    hitRenderer.material.color = UnityEngine.Random.ColorHSV();
+
+                    break;
+                case "Enemy":
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.red);
+                    hitRenderer.material.color = Color.red;
+                    break;
             }
         }
         else
         {
             //if there is not object intercepted by the ray this happens
             Debug.Log("Nothing to hit here...");
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.red);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.gray);
         }
     }
 }
