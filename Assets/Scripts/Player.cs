@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void castRay()
     {
         //Raycast Parameter Variables
-        RaycastHit hitInfo; //what was hit? This variabel stores the answer
+        RaycastHit hitInfo; //what was hit? This variable stores the answer
 
         //origin variable using camera position to cast ray from the mouse click position by using read value from new input system
         Ray rayOrigin = GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue()); 
