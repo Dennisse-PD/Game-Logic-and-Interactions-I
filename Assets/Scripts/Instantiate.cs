@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class Instantiate : MonoBehaviour
 {
     //variable to instantiate prefab
-    [SerializeField] GameObject _capsulePrefab;
+    [SerializeField] private GameObject _capsulePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +23,11 @@ public class Instantiate : MonoBehaviour
         //if left click instantiate
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            castRaySphere();
+            castRayCapsule();
         }
     }
    
-    void castRaySphere()
+    void castRayCapsule()
     {
         //hitInfo (to detect the floor)
         RaycastHit hitInfo;
