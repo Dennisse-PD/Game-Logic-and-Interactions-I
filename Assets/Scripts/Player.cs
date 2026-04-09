@@ -2,61 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.UI.Image;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] LayerMask layerMask;
+
+    //Vector 3 to store destination data
+   [SerializeField]
+   private Vector3 _destination;
+
+    //movement speed
+   private float _movementSpeed = 5.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+       //movement logic, this is done by calculating the distance
+       var distance = Vector3.Distance(_destination, transform.position); //this gives us a float value
+
+        if( distance > 0.1f)
         {
-            //cast the ray when mouse left button is pressed
-            castRay();
+            //direction = destination - source (this is the math formula for direction)
+            var direction = _destination - transform.position;
+            direction.Normalize(); //to avoid extra long vector, this normalizes it to 1
+
+            //movement 
+            transform.Translate(direction * _movementSpeed * Time.deltaTime);
         }
+
     }
-    void castRay()
+    public void UpdatePosition(Vector3 pos)
     {
-        //Raycast Parameter Variables
-        RaycastHit hitInfo; //what was hit? This variable stores the answer
-
-        //origin variable using camera position to cast ray from the mouse click position by using read value from new input system
-        Ray rayOrigin = GetComponent<Camera>().ScreenPointToRay(Mouse.current.position.ReadValue()); 
-
-        if(Physics.Raycast(rayOrigin, out hitInfo)) //Casts ray from origin, then check what was hit
-        {
-            var hitObject = hitInfo.collider;//variable to store collider data acquired via
-            var hitRenderer = hitInfo.collider.GetComponent<Renderer>();
-
-            if (hitObject == null)
-            {
-                return; // switch case won't run if there is nothing there(null)
-            }
-            switch (hitInfo.collider.tag)
-            {
-                case "Player":
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.green);
-                    hitRenderer.material.color = UnityEngine.Random.ColorHSV();
-
-                    break;
-                case "Enemy":
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.red);
-                    hitRenderer.material.color = Color.red;
-                    break;
-            }
-        }
-        else
-        {
-            //if there is not object intercepted by the ray this happens
-            Debug.Log("Nothing to hit here...");
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 100f, Color.gray);
-        }
+        _destination = pos; 
     }
 }

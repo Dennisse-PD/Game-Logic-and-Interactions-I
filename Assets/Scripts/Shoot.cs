@@ -13,7 +13,8 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //recast through center of crosshairs
+        //raycast through center of crosshairs
         //instantiate bullet hole decals(the same way I instantited the capsules before)
+        //Consider the rotation of the intantiated obj
     }
 }
