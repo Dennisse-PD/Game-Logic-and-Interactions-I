@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PointToMove : MonoBehaviour
 {
-    [SerializeField]
+     [SerializeField]
      private Player _player;
 
     // Start is called before the first frame update
