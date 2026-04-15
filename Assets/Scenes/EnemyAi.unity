@@ -793,7 +793,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!135 &1533861999
 SphereCollider:
@@ -905,7 +905,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4935c65cc87c5bc45b449115e5e28e33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points: []
+  _points:
+  - {fileID: 993098857}
+  - {fileID: 925798675}
+  - {fileID: 1402259649}
+  - {fileID: 1823870492}
+  - {fileID: 1888293662}
+  _agent: {fileID: 1533862003}
 --- !u!1 &1694795642
 GameObject:
   m_ObjectHideFlags: 0
