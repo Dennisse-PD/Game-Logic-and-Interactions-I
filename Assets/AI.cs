@@ -9,10 +9,10 @@ public class AI : MonoBehaviour
     // Store all points, object array?
    [SerializeField] private Transform[] _points;
 
-    // Select a random waypoint, .random on the array?
+    // Select a random waypoint
     private int _destinationPoint;
 
-    // Traverse to the random point, how do we do this in nav mesh? Check nav agen documentation 
+    // Access the object with the nav mesh agent
     [SerializeField] private NavMeshAgent _agent;
 
     // Start is called before the first frame update
@@ -45,14 +45,7 @@ public class AI : MonoBehaviour
             GotoNextPoint();
     }
     private void GotoNextPoint()
-    {
-        // Returns if no points have been set up, in other words, function won't run
-        if (_points.Length == 0)
-        {
-            Debug.Log("Point lengh is = to 0 ");
-            //return;
-        }
-               
+    {    
 
         _destinationPoint = Random.Range(0, _points.Length);
 
