@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 632109669}
   - component: {fileID: 632109668}
   m_Layer: 0
-  m_Name: Point_C
+  m_Name: Point_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,6 +788,7 @@ GameObject:
   - component: {fileID: 1533861999}
   - component: {fileID: 1533862003}
   - component: {fileID: 1533862004}
+  - component: {fileID: 1533862005}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -900,7 +901,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533861998}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4935c65cc87c5bc45b449115e5e28e33, type: 3}
   m_Name: 
@@ -909,9 +910,29 @@ MonoBehaviour:
   - {fileID: 993098857}
   - {fileID: 925798675}
   - {fileID: 1402259649}
+  - {fileID: 632109667}
   - {fileID: 1823870492}
   - {fileID: 1888293662}
   _agent: {fileID: 1533862003}
+--- !u!114 &1533862005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533861998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a4ec9d316cd34498c1a8dde0592dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wayPoints:
+  - {fileID: 993098857}
+  - {fileID: 925798675}
+  - {fileID: 1402259649}
+  - {fileID: 632109667}
+  - {fileID: 1823870492}
+  - {fileID: 1888293662}
 --- !u!1 &1694795642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,7 +1041,7 @@ GameObject:
   - component: {fileID: 1823870494}
   - component: {fileID: 1823870493}
   m_Layer: 0
-  m_Name: Point_D
+  m_Name: Point_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1115,7 +1136,7 @@ GameObject:
   - component: {fileID: 1888293660}
   - component: {fileID: 1888293659}
   m_Layer: 0
-  m_Name: Point_E
+  m_Name: Point_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
